@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            padding: 30px;
+        }
+        .form-container {
+            background: #fff;
+            padding: 25px 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+            width: 350px;
+        }
+        h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="tel"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            border-color: #007bff;
+        }
+        input[type="submit"] {
+            margin-top: 15px;
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h3>Credit Card Application Form</h3>
+        <form onsubmit="return validateForm()">
+            <label>Name:</label>
+            <input type="text" id="name">
+
+            <label>Email:</label>
+            <input type="text" id="email">
+
+            <label>Phone:</label>
+            <input type="tel" id="phone">
+
+            <label>Credit No:</label>
+            <input type="text" id="creditno">
+
+            <label>Password:</label>
+            <input type="password" id="password">
+
+            <label>ZIP Code:</label>
+            <input type="text" id="zip">
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        function validateForm(){
+            let namePattern = /^[A-Z][a-z\s]+$/;
+            let emailPattern = /^[\w.-]+@[A-Za-z]+\.[A-Za-z]{2,}$/;
+            let phonePattern = /^\d{10}$/;
+            let creditnoPattern = /^\d{4}[-\s]?\d{4}[-\s]?\d{4}[-\s]?\d{4}$/;
+            let passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            let zipPattern = /^\d{5}$/;
+
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let phone = document.getElementById("phone").value.trim();
+            let creditno = document.getElementById("creditno").value.trim();
+            let password = document.getElementById("password").value.trim();
+            let zip = document.getElementById("zip").value.trim();
+            
+            if(!namePattern.test(name)){ alert("Invalid name"); return false; }
+            if(!emailPattern.test(email)){ alert("Invalid email"); return false; }
+            if(!phonePattern.test(phone)){ alert("Invalid phone number"); return false; }
+            if(!creditnoPattern.test(creditno)){ alert("Invalid credit card number"); return false; }
+            if(!passwordPattern.test(password)){ alert("Invalid password"); return false; }
+            if(!zipPattern.test(zip)){ alert("Invalid ZIP code"); return false; }
+
+            // Get current date
+            let today = new Date();
+            let dateStr = today.toLocaleDateString();
+
+            alert("Form submitted successfully! Date: " + dateStr);
+            return true;
+        }
+    </script>
+</body>
+</html>
