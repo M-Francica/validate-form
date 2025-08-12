@@ -18,7 +18,7 @@
             let phonePattern = /^\d{10}$/;
             let creditnoPattern = /^\d{4}[-\s]?\d{4}[-\s]?\d{4}[-\s]?\d{4}$/;
             let passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-            let zipPattern = /^\d{6}$/;
+            let zipPattern = /^\d{}$/;
 
             let name = document.getElementById("name").value;
             let email = document.getElementById("email").value;
@@ -34,7 +34,10 @@
             if(!passwordPattern.test(password)){ alert("Invalid password"); return false; }
             if(!zipPattern.test(zip)){ alert("Invalid ZIP code"); return false; }
 
-            alert("Form submitted successfully!");
+            let today = new Date();
+            let dateStr = today.toLocaleDateString(); // e.g., 12/08/2025
+
+            alert("Form submitted successfully!  Date: " + dateStr);
             return true;
         }
     </script>
